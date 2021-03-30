@@ -1,0 +1,24 @@
+.painel-animado {
+    -moz-transition:transform 0.5s;
+    -webkit-transition:transform 0.5s;
+    -ms-transition:transform 0.5s;
+    -o-transition:transform 0.5s;
+    transition:transform 0.5s;
+}
+
+.painel-animado.ng-leave-active {
+  -moz-transform: scale(0.1);
+  -webkit-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  transform: scale(0.1);
+} 
+
+/* Observação: ng-leave-active/ ng-leave-enter.....tem vários */
+
+
+
+
+/* painel-animado.ng-leave-active (&& - tiver uma E outra) */
+
+/* IMPORTANTE!!!!: com espaço painel-animado. ng-leave-active > HIERARQUICO!!!!!!*/

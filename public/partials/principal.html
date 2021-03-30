@@ -1,0 +1,46 @@
+<div class="jumbotron">
+    <h1 class="text-center">Alurapic</h1>
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+<div class="row">
+    <div class="col-md-12">
+        <form>
+
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <a href="fotos/new" class="btn btn-primary">Nova Foto</a>
+                </span>
+                <!-- ng-model="filtro": TWO WAY DATA BIDING -->
+                <input ng-model="filtro" ng-model-options="{debounce: 1000}" class="form-control" placeholder="filtrar">
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Filtro no ngRepeat é ruim pois não filtro só tutilo mas sim todos os parametros do objeto -->
+    <meu-painel class="col-md-2 painel-animado" ng-repeat="el in fotos | filter: filtro" titulo="{{el.titulo}}">
+        <img class="img-responsive center-block" src="{{el.url}}" alt="{{el.titulo}}">
+        <a href="/fotos/edit/{{el._id}}" class="btn btn-primary btn-block">Editar</a>
+        <!-- <button ng-click="remover(el)" class="btn btn-danger btn-block">Remover</button> -->
+
+        <meu-botao-perigo nome="Remover" acao="remover(el)"></meu-botao-perigo>
+    </meu-painel>
+</div>
+
+<!-- btn-block: display block: um embaixo do outro -->
+
+<!-- A (anchor): botão tipo navegação
+Button: botão de acao apenas -->
+
+<!-- <div ng-repeat="element in fotos" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{element.titulo}}</h3>
+    </div>
+    <div class="panel-body">
+        <img class="img-responsive center-block" src="{{element.url}}" alt="{{element.titulo}}">
+    </div>
+</div> -->

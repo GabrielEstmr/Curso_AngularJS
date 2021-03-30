@@ -1,0 +1,70 @@
+<div class="page-header text-center">
+    <!-- Aqui queremos apenas apresentar e nao gravar > ai usa ANGULAR EXPRESSION -->
+    <!-- ng-model="foto.titulo" : atualizar e gravar -->
+    <h1>{{foto.titulo}}</h1>
+</div>
+
+<!-- //Para Cada acao do HTML: tem uma do ANGULAR TBM -->
+
+<!-- //novalidate: desabilida validação HTML5 -->
+
+
+<!-- IMPORTANTE: temos formulario(via name)
+Tudo o que tiver dentro do formulario com name tem a função formulario.namecomponente
+e tudo que é formulario.namecomponente tem a opçãão $error -->
+
+<!-- length = 0 => falsy -->
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+
+<form novalidate name="formulario" class="row" ng-submit="submeter()">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Título</label>
+            <input ng-model="foto.titulo" name="titulo" class="form-control" required ng-maxlength="20">
+            <!-- ng-show="formulario.titulo.$error.required" > só tira erro se há valor de título ==> MAS TEM QUE TER REQUIRED NO COMPONENTE -->
+            <span ng-show="formulario.$submitted && formulario.titulo.$error.required"
+                class="form-control alert-danger">Título
+                obrigatório</span>
+
+            <span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength"
+                class="form-control alert-danger">Campo deve ter até 20 caracteres</span>
+
+        </div>
+        <div class="form-group">
+            <label>URL</label>
+            <input ng-model="foto.url" name="url" class="form-control" required>
+            <span ng-show="formulario.$submitted && formulario.url.$error.required"
+                class="form-control alert-danger">Url Obrigatória</span>
+        </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <textarea ng-model="foto.descricao" name="descricao" class="form-control">
+            </textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Grupo</label>
+            <select name="grupo" class="form-control" ng-controller="GruposController" ng-model="foto.grupo"
+                ng-options="grupo._id as (grupo.nome | uppercase) for grupo in grupos" required>
+                <option value="{{el._id}}" ng-repeat="el in fotos | filter: filtro">{{el.nome}}</option>
+            </select>
+
+            <!-- <select name="grupo" class="form-control" ng-controller="GruposController" ng-model="foto.grupo" required>
+                <option value="{{el._id}}" ng-repeat="el in grupos">{{el.nome}}</option>
+            </select> -->
+            <span ng-show="formulario.$submitted && formulario.grupo.$error.required"
+                class="form-control alert-danger">Grupo Obrigatória</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid">
+            Salvar
+        </button>
+        <!-- <a href="/" class="btn btn-primary" meu-focus focado="focado">Voltar</a> -->
+        <!-- APOS BROADCAST -->
+        <a href="/" class="btn btn-primary" meu-focus>Voltar</a>
+        <hr>
+    </div>
+    <div class="col-md-6">
+        <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}"></minha-foto>
+    </div>
+</form>
